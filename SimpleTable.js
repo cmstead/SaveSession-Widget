@@ -611,15 +611,17 @@ define(['dojo/_base/declare',
                             this._onActionsLoad(tr);
                         })));
                     } else if (item === 'download') {
-                        var loadDiv = html.create('div', {
-                            'class': 'action-item jimu-float-leading row-load-div jimu-icon jimu-icon-download'
-                        }, actionItemParent);
-                        loadDiv.title = "Download Map";
-                        this.own(on(loadDiv, 'click', lang.hitch(this, function (event) {
-                            event.stopPropagation();
+                        // Commented out due to failures downloading data
+                        
+                        // var loadDiv = html.create('div', {
+                        //     'class': 'action-item jimu-float-leading row-load-div jimu-icon jimu-icon-download'
+                        // }, actionItemParent);
+                        // loadDiv.title = "Download Map";
+                        // this.own(on(loadDiv, 'click', lang.hitch(this, function (event) {
+                        //     event.stopPropagation();
 
-                            this._onActionsDownload(tr);
-                        })));
+                        //     this._onActionsDownload(tr);
+                        // })));
                     } else if (item === 'edit') {
                         var editDiv = html.create('div', {
                             'class': 'action-item jimu-float-leading row-edit-div jimu-icon jimu-icon-edit'
