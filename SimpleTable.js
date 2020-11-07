@@ -614,7 +614,7 @@ define(['dojo/_base/declare',
                     } else if (item === 'download') {
                         var loadDiv = html.create('a', {
                             'class': 'action-item jimu-float-leading row-load-div jimu-icon jimu-icon-download',
-                            'href': 'data:application/octet-stream,' + encodeURI(JSON.stringify(tr.item)),
+                            'href': 'data:application/octet-stream,' + encodeURI(JSON.stringify([tr.item])),
                             'download': tr.item.name.replace(/\s/g, '_') + '_Session.json'
                         }, actionItemParent);
                         loadDiv.title = "Download Map";
