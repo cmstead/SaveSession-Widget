@@ -443,6 +443,12 @@ define(['dojo/_base/declare',
              */
             onSaveItemToFileClicked: function (e) {
 
+                if (!this.config.useServerToDownloadFile) {
+                    // skipping since there is no url to submit to
+                    console.log('SaveSession :: onSaveItemToFileClicked :: saveToFileForm submit canceled.');
+                    return;
+                }
+
                 var sessionString = "",
                     fileName = "",
                     sessions = [];

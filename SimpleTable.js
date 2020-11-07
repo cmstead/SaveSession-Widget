@@ -299,6 +299,8 @@ define(['dojo/_base/declare',
                 var rowId = 'row' + this._rowIndex;
                 html.setAttr(tr, 'rowId', rowId);
 
+                tr.item = rowData;
+
                 array.forEach(this.fields, lang.hitch(this, function (fieldMeta) {
                     var fieldData = rowData[fieldMeta.name];
                     var type = fieldMeta.type;
@@ -324,7 +326,6 @@ define(['dojo/_base/declare',
                 }));
 
                 // attach item as attribute of tr so can retrieve later
-                tr.item = rowData;
 
                 if (!dontUpdateUI) {
                     this._updateUI();
@@ -611,17 +612,17 @@ define(['dojo/_base/declare',
                             this._onActionsLoad(tr);
                         })));
                     } else if (item === 'download') {
-                        // Commented out due to failures downloading data
-                        
-                        // var loadDiv = html.create('div', {
-                        //     'class': 'action-item jimu-float-leading row-load-div jimu-icon jimu-icon-download'
-                        // }, actionItemParent);
-                        // loadDiv.title = "Download Map";
-                        // this.own(on(loadDiv, 'click', lang.hitch(this, function (event) {
-                        //     event.stopPropagation();
+                        var loadDiv = html.create('a', {
+                            'class': 'action-item jimu-float-leading row-load-div jimu-icon jimu-icon-download',
+                            'href': 'data:application/octet-stream,' + encodeURI(JSON.stringify(tr.item)),
+                            'download': tr.item.name.replace(/\s/g, '_') + '_Session.json'
+                        }, actionItemParent);
+                        loadDiv.title = "Download Map";
+                        this.own(on(loadDiv, 'click', lang.hitch(this, function (event) {
+                            event.stopPropagation();
 
-                        //     this._onActionsDownload(tr);
-                        // })));
+                            this._onActionsDownload(tr);
+                        })));
                     } else if (item === 'edit') {
                         var editDiv = html.create('div', {
                             'class': 'action-item jimu-float-leading row-edit-div jimu-icon jimu-icon-edit'
